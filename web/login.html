@@ -2,68 +2,94 @@
 <html>
 <head>
     <title>享学图书管理系统</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="享学图书管理系统" />
-    <meta name="keywords" content="享学,网站管理系统,企业网站" />
-    <meta name="Author" content="phenix" />
-    <meta name="CopyRight" content="享学科技" />
-    <link rel="stylesheet" type="text/css" href="./Style/skin.css" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="享学图书管理系统" name="description"/>
+    <meta content="享学,网站管理系统,企业网站" name="keywords"/>
+    <meta content="phenix" name="Author"/>
+    <meta content="享学科技" name="CopyRight"/>
+    <link href="./Style/skin.css" rel="stylesheet" type="text/css"/>
     <script language="JavaScript" src="Js/jquery-3.3.1.min.js"></script>
 
     <script language="JavaScript">
         // 1. 文档加载完成时，即完成了jquery的调用
-        $(function (){
+        $(function () {
             // 2.图片点击事件
-            $("#code").click(function (){
+            $("#code").click(function () {
                 // 3. 更换src属性
-                $(this).prop("src","code?id="+ Math.random());
+                $(this).prop("src", "code?id=" + Math.random());
             });
         });
     </script>
 </head>
-    <body>
-        <table width="100%" >
-            <!-- 顶部部分 -->
-            <tr height="41"><td colspan="2" background="./Images/login_top_bg.gif">&nbsp;</td></tr>
-            <!-- 主体部分 -->
-            <tr style="background:url(./Images/login_bg.jpg) repeat-x;" height="532"    >
-                <!-- 主体左部分 -->
-                <td id="left_cont" valign="top"  width="100%" height="100%">
-                    <table  >
-                        <tr>
-                            <td width="20%" rowspan="2">
-                                <ul>
-                                    <li><img src="./Images/book.jpg" />&nbsp;<a href="javascript:void(0)"></li>
-                                </ul>
-                             </td>
-                        </tr>
-                    </table>
-                </td>
-                <!-- 主体右部分 -->
-                <td id="right_cont">
-                    <table height="100%">
-                        <tr height="30%"><td colspan="3">&nbsp;</td></tr>
-                        <tr>
-                            <td width="30%" rowspan="5">&nbsp;</td>
-                            <td valign="top" id="form">
-                                <form id="fmLogin" method="post" action="user?type=login">
-                                    <table valign="top" width="50%">
-                                        <tr><td colspan="2"><h4 style="letter-spacing:1px;font-size:16px;">享学图书管理系统</h4></td></tr>
-                                        <tr><td>管理员：</td><td><input type="text" name="name" required /></td></tr>
-                                        <tr><td>密&nbsp;&nbsp;&nbsp;&nbsp;码：</td><td><input type="password" name="pwd" required/></td></tr>
-                                        <tr><td>验证码：</td><td style="position: relative;"><input type="text" name="valcode" value="" style="width:60px;"/>&nbsp;<img id="code" src="code" style="position: absolute; top:2px;" /></td></tr>
-                                        <tr class="bt"><td>&nbsp;</td><td><input type="submit" value="登录" />&nbsp;<input type="reset" value="重填" /></td></tr>
-                                    </table>
-                                </form>
-                            </td>
-                            <td rowspan="5">&nbsp;</td>
-                        </tr>
-                        <tr><td colspan="3">&nbsp;</td></tr>
-                    </table>
-                </td>
-            </tr>
-            <!-- 底部部分 -->
-            <tr id="login_bot"><td colspan="2"><p>Copyright © 2011-2021 享学课堂科技信息有限公司</p></td></tr>
-        </table>
-    </body>
+<body>
+<table width="100%">
+    <!-- 顶部部分 -->
+    <tr height="41">
+        <td background="./Images/login_top_bg.gif" colspan="2">&nbsp;</td>
+    </tr>
+    <!-- 主体部分 -->
+    <tr height="532" style="background:url(./Images/login_bg.jpg) repeat-x;">
+        <!-- 主体左部分 -->
+        <td height="100%" id="left_cont" valign="top" width="100%">
+            <table>
+                <tr>
+                    <td rowspan="2" width="20%">
+                        <ul>
+                            <li><img src="./Images/book.jpg"/>&nbsp;<a href="javascript:void(0)"></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <!-- 主体右部分 -->
+        <td id="right_cont">
+            <table height="100%">
+                <tr height="30%">
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td rowspan="5" width="30%">&nbsp;</td>
+                    <td id="form" valign="top">
+                        <form action="user?type=login" id="fmLogin" method="post">
+                            <table valign="top" width="50%">
+                                <tr>
+                                    <td colspan="2"><h4 style="letter-spacing:1px;font-size:16px;">享学图书管理系统</h4></td>
+                                </tr>
+                                <tr>
+                                    <td>管理员：</td>
+                                    <td><input name="name" required type="text"/></td>
+                                </tr>
+                                <tr>
+                                    <td>密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+                                    <td><input name="pwd" required type="password"/></td>
+                                </tr>
+                                <tr>
+                                    <td>验证码：</td>
+                                    <td style="position: relative;"><input name="valcode" style="width:60px;" type="text"
+                                                                           value=""/>&nbsp;<img id="code"
+                                                                                                           src="code"
+                                                                                                           style="position: absolute; top:2px;"/>
+                                    </td>
+                                </tr>
+                                <tr class="bt">
+                                    <td>&nbsp;</td>
+                                    <td><input type="submit" value="登录"/>&nbsp;<input type="reset" value="重填"/></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </td>
+                    <td rowspan="5">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <!-- 底部部分 -->
+    <tr id="login_bot">
+        <td colspan="2"><p>Copyright © 2011-2021 享学课堂科技信息有限公司</p></td>
+    </tr>
+</table>
+</body>
 </html>
