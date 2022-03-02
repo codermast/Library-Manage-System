@@ -22,7 +22,7 @@ public class Book implements Serializable {
   private String address;
 
   //外键对应的实体对象
-  private Type  type;
+  private Type type;
 
   public Type getType() {
     return type;
