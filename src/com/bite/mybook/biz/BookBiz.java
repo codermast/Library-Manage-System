@@ -1,7 +1,9 @@
 package com.bite.mybook.biz;
 
 import com.bite.mybook.bean.Book;
+import com.bite.mybook.bean.Type;
 import com.bite.mybook.dao.BookDao;
+import com.bite.mybook.dao.TypeDao;
 import com.bite.mybook.util.DBHelper;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -84,9 +86,16 @@ public class BookBiz {
 
     // 查询某一页的书籍
     public List<Book> getBookByPage(long page,long count){
+        TypeDao typeDao = new TypeDao();
+
         List<Book> books = null;
         try {
             books = bookDao.getBookByPage(page,count);
+            // 查询完以后，这里列表中的 book 对象的 type 属性 还是默认值 null ，因为数据库中没有存储该book的type,仅存储了 typeId
+            for (Book book : books) {
+                long typeId = book.getTypeId();
+                book.setType(typeDao.getTypeById(typeId));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
