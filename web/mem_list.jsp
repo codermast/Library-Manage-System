@@ -84,9 +84,9 @@
                                                     <td>${m.idNumber}</td>
                                                     <td>
                                                         <a onclick="return confirm('确认修改');"
-                                                           href="member.let?type=modifypre&id=${m.id}">修改</a>&nbsp;&nbsp;
+                                                           href="member?type=modifypre&id=${m.id}">修改</a>&nbsp;&nbsp;
                                                         <a onclick="return confirm('确认删除');"
-                                                           href="member.let?type=remove&id=${m.id}">删除</a>
+                                                           href="member?type=remove&id=${m.id}">删除</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

@@ -61,7 +61,7 @@
                         <table width="100%">
                             <tr>
                                 <td colspan="2">
-                                    <form action="member.let?type=modifyrecharge" method="post">
+                                    <form action="member?type=modifyrecharge" method="post">
                                         <table width="100%" class="cont">
                                             <tr>
                                                 <td width="2%">&nbsp;</td>

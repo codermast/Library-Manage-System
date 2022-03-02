@@ -73,7 +73,7 @@
                         <table width="100%">
                             <tr>
                                 <td colspan="2">
-                                    <form action="member.let?type=modify" method="post">
+                                    <form action="member?type=modify" method="post">
                                         <table width="100%" class="cont">
                                             <tr>
                                                 <td width="2%">&nbsp;</td>
