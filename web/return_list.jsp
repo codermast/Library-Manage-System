@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" import="java.util.*" %>
-<%@ page import="com.enjoy.book.bean.Record" %>
+<%@ page import="com.bite.mybook.bean.Record" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
                 var idn = $("#idNubmer").val();
 
                 //发送请求
-                location.href = "record.let?type=queryback&idn=" + idn
+                location.href = "record?type=queryback&idn=" + idn
             });
             $("#btnReturn").click(function () {
 

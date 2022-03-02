@@ -89,7 +89,7 @@
                         <table width="100%">
                             <tr>
                                 <td colspan="2">
-                                    <form action="book.let?type=add" method="post" enctype="multipart/form-data">
+                                    <form action="book?type=add" method="post" enctype="multipart/form-data">
                                         <table width="100%" class="cont">
                                             <tr>
                                                 <td width="2%">&nbsp;</td>

@@ -75,7 +75,7 @@
                                         </tr>
                                         <c:forEach items="${books}" var="b">
                                             <tr align="center" class="d">
-                                                <td><a href="book.let?type=details&id=${b.id}">${b.id}</a></td>
+                                                <td><a href="book?type=details&id=${b.id}">${b.id}</a></td>
                                                 <td>${b.name}</td>
                                                 <td>${b.type.name}</td>
                                                 <td>${b.author}</td>
@@ -84,9 +84,9 @@
                                                 <td><img src="${b.pic}" class="cover"/></td>
                                                 <td>
                                                     <a onclick="return confirm('确认修改');"
-                                                       href="book.let?type=modifypre&id=${b.id}">修改</a>&nbsp;&nbsp;
+                                                       href="book?type=modifypre&id=${b.id}">修改</a>&nbsp;&nbsp;
                                                     <a onclick="return confirm('确认删除');"
-                                                       href="book.let?type=remove&id=${b.id}">删除</a>
+                                                       href="book?type=remove&id=${b.id}">删除</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -96,22 +96,22 @@
                                                 <div class="pager">
                                                     <ul class="clearfix">
                                                         <li>
-                                                            <a href="book.let?type=query&pageIndex=${param.pageIndex-1}">上一页</a>
+                                                            <a href="book?type=query&pageIndex=${param.pageIndex-1}">上一页</a>
                                                         </li>
                                                         <c:forEach var="i" begin="1" end="${pageCount}" step="1">
                                                             <c:if test="${i==param.pageIndex}">
                                                                 <li class="current"><a
-                                                                        href="book.let?type=query&pageIndex=${i}">${i}</a>
+                                                                        href="book?type=query&pageIndex=${i}">${i}</a>
                                                                 </li>
                                                             </c:if>
                                                             <c:if test="${i!=param.pageIndex}">
                                                                 <li>
-                                                                    <a href="book.let?type=query&pageIndex=${i}">${i}</a>
+                                                                    <a href="book?type=query&pageIndex=${i}">${i}</a>
                                                                 </li>
                                                             </c:if>
                                                         </c:forEach>
                                                         <li>
-                                                            <a href="book.let?type=query&pageIndex=${param.pageIndex+1}">下一页</a>
+                                                            <a href="book?type=query&pageIndex=${param.pageIndex+1}">下一页</a>
                                                         </li>
                                                     </ul>
                                                 </div>

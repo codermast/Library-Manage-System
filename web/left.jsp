@@ -55,7 +55,7 @@
                     </table>
                     <ul class="RM">
                         <li><a href="./book_add.jsp" target="main">添加图书</a></li>
-                        <li><a href="./book.let?type=query&pageIndex=1" target="main">图书列表</a></li>
+                        <li><a href="./book?type=query&pageIndex=1" target="main">图书列表</a></li>
                     </ul>
                 </div>
                 <h1 class="type"><a href="javascript:void(0)">图书类型管理</a></h1>

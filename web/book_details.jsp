@@ -131,7 +131,7 @@
                                                 <td width="2%">&nbsp;</td>
                                                 <td>存放地址:</td>
                                                 <td width="20%"><input class="text" type="text" name="address"
-                                                                       value="${book.address}" readonly/></td>
+                                                                       value="${book.address}" disabled="disabled"/></td>
                                                 <td></td>
                                                 <td width="2%">&nbsp;</td>
                                             </tr>
@@ -147,7 +147,7 @@
                                                 <td>&nbsp;</td>
                                                 <td></td>
                                                 <td colspan="3"><input class="btn" type="button" value="返回"
-                                                                       onclick="window.location='book.let?type=query&pageIndex=1';"/>
+                                                                       onclick="window.location='book?type=query&pageIndex=1';"/>
                                                 </td>
                                             </tr>
                                         </table>
