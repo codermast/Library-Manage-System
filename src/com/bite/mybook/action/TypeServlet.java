@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -32,14 +33,22 @@ public class TypeServlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
 
         PrintWriter out = resp.getWriter();
+
+        //验证用户是否登录
+        HttpSession session = req.getSession();
+        if (session.getAttribute("user") == null) {
+            out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+            return;
+        }
+
         ServletContext application = req.getServletContext();
 
         String type = req.getParameter("type");
 
-        switch (type){
+        switch (type) {
             // 修改之前的操作
             case "modifypre":
-                modifypre(req,resp,out,application);
+                modifypre(req, resp, out, application);
                 break;
 
             // 修改类型
