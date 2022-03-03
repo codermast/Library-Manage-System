@@ -1,5 +1,6 @@
 package com.bite.mybook.action;
 
+import com.alibaba.fastjson.JSON;
 import com.bite.mybook.bean.Member;
 import com.bite.mybook.bean.Membertype;
 import com.bite.mybook.biz.MemberBiz;
@@ -33,9 +34,7 @@ public class MemberServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         ServletContext application = req.getServletContext();
 
-
         String method = req.getParameter("type");
-
 
         switch (method){
             case "query":
@@ -59,7 +58,19 @@ public class MemberServlet extends HttpServlet {
             case "modifyrecharge":
                 modifyrecharge(req,resp,out,application);
                 break;
+            case "doajax":
+                doajax(req,resp,out,application);
+                break;
         }
+    }
+
+    private void doajax(HttpServletRequest req, HttpServletResponse resp, PrintWriter out, ServletContext application) {
+        String idNum = req.getParameter("idn");
+        MembertypeBiz membertypeBiz = new MembertypeBiz();
+        Member memberByIdNumber = memberBiz.getMemberByIdNumber(idNum);
+        memberByIdNumber.setType(membertypeBiz.getByTypeId(memberByIdNumber.getTypeId()));
+        String memberJsonStr = JSON.toJSONString(memberByIdNumber);
+        out.print(memberJsonStr);
     }
 
     private void modifyrecharge(HttpServletRequest req, HttpServletResponse resp, PrintWriter out, ServletContext application) throws ServletException, IOException {
