@@ -73,6 +73,19 @@ public class BookBiz {
         return isTrue;
     }
 
+    // 更新书籍库存
+    // count: > 0 加库存
+    //        < 0 减库存
+    public boolean modify(long bookId,long count) {
+        boolean modify = false;
+        try {
+            modify = bookDao.modify(bookId, count);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return modify;
+    }
+
     // 获取有多少本书
     public int getCount(){
         int count = 0;
