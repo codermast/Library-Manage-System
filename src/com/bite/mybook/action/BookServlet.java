@@ -51,8 +51,6 @@ public class BookServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
         PrintWriter out = resp.getWriter();
@@ -63,7 +61,6 @@ public class BookServlet extends HttpServlet {
             out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
             return;
         }
-
 
         String type = req.getParameter("type");
         switch (type) {
