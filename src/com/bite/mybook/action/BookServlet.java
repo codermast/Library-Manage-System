@@ -268,9 +268,9 @@ public class BookServlet extends HttpServlet {
 
         int pageCount = 0;
         // 页数：一共有多少页
-        if (bookBiz.getCount() % pageSize == 0){
+        if (bookBiz.getCount() % pageSize == 0) {
             pageCount = bookBiz.getCount() / pageSize;
-        }else{
+        } else {
             pageCount = bookBiz.getCount() / pageSize + 1;
         }
 
