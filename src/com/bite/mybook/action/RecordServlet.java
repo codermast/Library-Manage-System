@@ -43,9 +43,17 @@ public class RecordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
-        HttpSession session = req.getSession();
         PrintWriter out = resp.getWriter();
+
+        //验证用户是否登录
+        HttpSession session = req.getSession();
+        if (session.getAttribute("user") == null) {
+            out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+            return;
+        }
+
         User user = (User) session.getAttribute("user");
+
 
         ServletContext application = req.getServletContext();
 
