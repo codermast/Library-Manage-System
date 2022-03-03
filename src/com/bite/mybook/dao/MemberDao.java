@@ -1,6 +1,7 @@
 package com.bite.mybook.dao;
 
 import com.bite.mybook.bean.Member;
+import com.bite.mybook.biz.MemberBiz;
 import com.bite.mybook.util.DBHelper;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -115,20 +116,77 @@ public class MemberDao {
     }
 
     // 会员充值
+
+    // 通过身份证号修改余额
     public boolean memberRecharge(String idNumber,double amount) throws SQLException {
         Connection connection = DBHelper.getConnection();
 
-        String selectSql = "select * from member where idNumber=?";
-
-        Member member = runner.query(connection, selectSql, new BeanHandler<>(Member.class), idNumber);
-
-        String updateSql = "update member set balance=? where idNumber=?";
-
-        int line = runner.update(connection, updateSql, member.getBalance() + amount, idNumber);
+        String updateSql = "update member set balance=balance+? where idNumber=?";
+        int line = runner.update(connection, updateSql, amount, idNumber);
 
         connection.close();
 
         return line > 0;
     }
 
+    // 通过mId修改余额
+
+    /*
+    *   amount > 0 : 借书，付押金
+    *   amount < 0 : 还书，退押金
+    * */
+    public boolean memberChangeByMid(long mid,double amount) throws SQLException {
+        Connection connection = DBHelper.getConnection();
+
+        String sql = "update member set balance=balance+? where id=?";
+
+        int update = runner.update(connection, sql, amount, mid);
+
+        connection.close();
+        return update == 1;
+    }
+
+    // 通过身份证号获取会员信息
+    public Member getMemberByIdNumber(String idNumber) throws SQLException {
+        Connection connection = DBHelper.getConnection();
+
+        String sql = "select * from member where idNumber=?";
+
+        Member member = runner.query(connection, sql, new BeanHandler<>(Member.class), idNumber);
+        connection.close();
+        return member;
+    }
+
+    // 通过 id 号获取会员信息
+    public Member getMemberById(long id) throws SQLException {
+        Connection connection = DBHelper.getConnection();
+
+        String sql = "select * from member where id=?";
+
+        Member member = runner.query(connection, sql, new BeanHandler<>(Member.class), id);
+        connection.close();
+        return member;
+    }
+
+
+    public long getIdByIdNum(String idNumber) throws SQLException {
+        Connection connection = DBHelper.getConnection();
+
+        String sql = "select * from member where idNumber=?";
+
+        Member member = runner.query(connection, sql, new BeanHandler<>(Member.class), idNumber);
+        connection.close();
+        return member.getId();
+    }
+
+
+    public static void main(String[] args) {
+        MemberDao memberDao = new MemberDao();
+
+        try {
+            memberDao.memberChangeByMid(2,100);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
