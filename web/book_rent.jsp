@@ -45,13 +45,9 @@
             var date = dateObj.getDate();
             var dateStr = year + "-" + (month >= 10 ? month : "0" + month) + "-" + (date >= 10 ? date : "0" + date);
             return dateStr;
-
         }
 
-
         $(function () {
-
-
             $("#btnQueryBook").prop("disabled", "disabled");
             $("#btnSubmit").prop("disabled", "disabled");
             var member = null;
@@ -64,13 +60,16 @@
                     return;
                 }
                 //2.调用js-ajax()/post()/get
-                var url = "member.let?type=doajax&idn=" + content;
+                var url = "member?type=doajax&idn=" + content;
                 $.get(url, function (data, status) {
                     //json字符串
                     //{"balance":145.0,"id":1,"idNumber":"300312199506150011","name":"andy","pwd":"andyliu","regdate":1627747200000,"tel":"13374645654","type":{"amount":"5","discount":100.0,"id":1,"keepDay":30,"name":"普通会员","recharge":100},"typeId":1}
                     console.log(data);
+
                     //1.json字符串--》json对象
                     member = JSON.parse(data);
+
+                    // 打印信息到控制台
                     console.log(member.balance + "," + member.type.name + "," + member.type.amount + "," + member.name);
                     //2.给组件赋值
                     $("#name").val(member.name);
@@ -89,7 +88,7 @@
             var bookNameList = [];
             $("#btnQueryBook").click(function () {
                 var name = $("#bookContent").val();
-                var url = "book.let?type=doajax&name=" + name;
+                var url = "book?type=doajax&name=" + name;
                 $.get(url, function (data, status) {
                     //{}/一本书的json
                     console.log(data);
@@ -151,6 +150,7 @@
             $("#ckAll").click(function () {
                 $(".ck").prop("checked", $(this).prop("checked"));
             });
+
             //完成借阅功能
             $("#btnSubmit").click(function () {
 
@@ -171,8 +171,8 @@
                     alert("借阅数量超出范围");
                     return;
                 }
-                //请求servlet http://localhost:8888/mybook_war_exploded/record.let?type=add&mid=1&ids=5_4_9_10
-                location.href = "record.let?type=add&mid=" + member.id + "&ids=" + ids.join("_");
+                //请求servlet http://localhost:8888/mybook_war_exploded/record?type=add&mid=1&ids=5_4_9_10
+                location.href = "record?type=add&mid=" + member.id + "&ids=" + ids.join("_");
             });
         });
 
@@ -245,8 +245,6 @@
                                     <td width="17%"><input class="text" type="text" id="name" disabled/></td>
                                     <td width="8%" class="run-right">会员类型:</td>
                                     <td width="17%"><input class="text" type="text" id="type" disabled/></td>
-                                    <td width="8%" class="run-right">可借数量</td>
-                                    <td width="17%"><input class="text" type="text" id="amount" disabled/></td>
                                     <td width="8%" class="run-right">账户余额</td>
                                     <td width="17%"><input class="text" type="text" id="balance" disabled/></td>
                                 </tr>
