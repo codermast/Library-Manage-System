@@ -40,8 +40,8 @@
                 //2.连城一个字符串
                 var idStr = idList.join("_");
 
-                //3.发送请求  record.let?type=back&mid=1&ids=1_2  record.let?type=back&mid=1&ids=1___
-                var path = "record.let?type=back&mid=" + $("#memberId").val() + "&ids=" + idStr;
+                //3.发送请求  record?type=back&mid=1&ids=1_2  record?type=back&mid=1&ids=1___
+                var path = "record?type=back&mid=" + $("#memberId").val() + "&ids=" + idStr;
                 location.href = path;
                 console.log(path);
 
@@ -122,8 +122,6 @@
                                         </td>
                                         <td width="8%" class="run-right">会员类型:</td>
                                         <td width="17%"><input class="text" type="text" disabled/></td>
-                                        <td width="8%" class="run-right">可借数量</td>
-                                        <td width="17%"><input class="text" type="text" disabled/></td>
                                         <td width="8%" class="run-right">账户余额</td>
                                         <td width="17%"><input class="text" type="text" disabled/></td>
                                     </tr>
@@ -190,10 +188,10 @@
                                                 <th><input type="checkbox" value="" id="ckAll"/>全选/全不选</th>
                                                 <th>书籍名</th>
                                                 <th>借阅时间</th>
-                                                <th>应还时间</th>
                                                 <th>出版社</th>
                                                 <th>书架</th>
                                                 <th>押金(元)</th>
+                                                <th>归还与否</th>
                                                 <th>操作</th>
                                             </tr>
                                             <c:if test="${records==null}">
@@ -203,42 +201,32 @@
                                             </c:if>
                                             <c:if test="${records!=null}">
                                                 <c:forEach items="${records}" var="r">
-                                                    <!--逾期的处理-->
-                                                    <%
-                                                        Record record = (Record) pageContext.getAttribute("r");
-                                                        //系统的当前时间
-                                                        java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
-                                                        if (record.getBackDate().before(date)) {
-                                                    %>
-                                                    <tr align="center" class="d" style="background-color:#f08080">
-                                                        <td><input type="checkbox" value="${r.id}" class="ck" checked/>
-                                                        </td>
-                                                        <td>${r.book.name}</td>
-                                                        <td>${r.rentDate}</td>
-                                                        <td>${r.backDate}</td>
-                                                        <td>${r.book.publish}</td>
-                                                        <td>${r.book.address}</td>
-                                                        <td>${r.deposit}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    <%
-                                                    } else {
-                                                    %>
-                                                    <tr align="center" class="d">
-                                                        <td><input type="checkbox" value="${r.id}" class="ck" checked/>
-                                                        </td>
-                                                        <td>${r.book.name}</td>
-                                                        <td>${r.rentDate}</td>
-                                                        <td>${r.backDate}</td>
-                                                        <td>${r.book.publish}</td>
-                                                        <td>${r.book.address}</td>
-                                                        <td>${r.deposit}</td>
-                                                        <td><a href="record.let?type=keep&id=${r.id}">续借</a></td>
-                                                    </tr>
-                                                    <%
-                                                        }
-                                                    %>
-
+                                                    <c:if test="${r.isBack == 0 && r.backDate == null}">
+                                                        <tr align="center" class="d" style="background-color:#f08080">
+                                                            <td><input type="checkbox" value="${r.id}" class="ck"/>
+                                                            </td>
+                                                            <td>${r.book.name}</td>
+                                                            <td>${r.rentDate}</td>
+                                                            <td>${r.book.publish}</td>
+                                                            <td>${r.book.address}</td>
+                                                            <td>${r.deposit}</td>
+                                                            <td>未归还</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </c:if>
+                                                    <c:if test="${r.isBack == 1}">
+                                                        <tr align="center" class="d">
+                                                            <td><input type="checkbox" value="${r.id}" class="ck"/>
+                                                            </td>
+                                                            <td>${r.book.name}</td>
+                                                            <td>${r.rentDate}</td>
+                                                            <td>${r.book.publish}</td>
+                                                            <td>${r.book.address}</td>
+                                                            <td>${r.deposit}</td>
+                                                            <td>已归还</td>
+                                                            <td><a href="record?type=keep&id=${r.id}">续借</a></td>
+                                                        </tr>
+                                                    </c:if>
                                                 </c:forEach>
                                             </c:if>
                                         </table>
@@ -284,5 +272,11 @@
         </td>
     </tr>
 </table>
+<script>
+    //全选功能
+    $("#ckAll").click(function () {
+        $(".ck").prop("checked", $(this).prop("checked"));
+    });
+</script>
 </body>
 </html>

@@ -7,57 +7,6 @@
     <meta http-equiv="author" content="phenix"/>
     <link rel="stylesheet" type="text/css" href="./Style/skin.css"/>
     <script src="Js/jquery-3.3.1.min.js"></script>
-    <script>
-
-        $(function () {
-            $("#btnQuery").click(function () {
-                //0.清理
-                $("#tbRecord").find("tbody").html("");
-                //1.获取id
-                var typeId = $(":radio:checked").prop("value");
-                //2.获取关键字
-                var keyword = $("#keyword").val();
-                //3.组成url
-                var url = "record.let?type=doajax&typeId=" + typeId + "&keyword=" + keyword;
-                //4.发送并获取数据
-                $.get(url, function (data) {
-                    console.log(data);
-                    //5.数据加载到页面
-                    if (data === "[]") {
-                        alert("没有信息展示");
-                        return;
-                    }
-
-                    //1. data=>json对象
-                    var records = JSON.parse(data);
-                    for (var i = 0; i < records.length; i++) {
-                        var record = records[i];
-                        //tr
-                        var tr = $(" <tr align=\"center\" class=\"d\">");
-                        var tdMName = $(" <td>" + record.memberName + "</td>");
-                        var tdBName = $("<td>" + record.bookName + "</td>");
-                        var tdRentDate = $("<td>" + record.rentDate + "</td>");
-                        var tdBackDate = $("<td>" + (record.backDate === undefined ? "" : record.backDate) + "</td>");
-                        var tdDeposit = $("<td>" + record.deposit + "</td>");
-                        //5-td
-                        tr.append(tdMName);
-                        tr.append(tdBName);
-                        tr.append(tdRentDate);
-                        tr.append(tdBackDate);
-                        tr.append(tdDeposit);
-
-                        //加入到表
-                        $("#tbRecord").find("tbody").append(tr);
-                    }
-
-                });
-
-
-            });
-
-        });
-
-    </script>
 
 </head>
 <body>
@@ -116,9 +65,7 @@
                                     <td colspan="8" align="center">
                                         <input type="radio" name="query" value="0" checked/>全部 &nbsp;&nbsp;
                                         <input type="radio" name="query" value="1"/>已归还 &nbsp;&nbsp;
-                                        <input type="radio" name="query" value="2"/>未归还 &nbsp;&nbsp;
-                                        <input type="radio" name="query" value="3"/>最近一周需归还 &nbsp;&nbsp;
-                                        请输入关键字:&nbsp;&nbsp;<input class="text" type="text" id="keyword" name="keyword"/>
+                                        <input type="radio" name="query" value="2"/>未归还
                                         <input type="button" id="btnQuery" value="搜索" style="width: 80px;"/></td>
                                     </td>
                                 </tr>
@@ -196,5 +143,52 @@
         </td>
     </tr>
 </table>
+<script>
+    $(function () {
+        $("#btnQuery").click(function () {
+            //0.清理
+            $("#tbRecord").find("tbody").html("");
+            //1.获取id
+            var typeId = $(":radio:checked").prop("value");
+            //3.组成url
+            var url = "record?type=doajax&typeId=" + typeId;
+            //4.发送并获取数据
+            $.get(url, function (data) {
+                //5.数据加载到页面
+                if (data === "[]") {
+                    alert("没有信息展示");
+                    return;
+                }
+
+                //1. data=>json对象
+                var records = JSON.parse(data);
+                console.log(records);
+                for (var i = 0;i<records.length ;i++) {
+                    var record = records[i];
+                    //tr
+                    var tr = $(" <tr align=\"center\" class=\"d\">");
+                    var tdMName = $(" <td>" + record.member.name + "</td>");
+                    var tdBName = $("<td>" + record.book.name + "</td>");
+                    var tdRentDate = $("<td>" + record.rentDate + "</td>");
+                    var tdBackDate = $("<td>" + (record.backDate === undefined ? "" : record.backDate) + "</td>");
+                    var tdDeposit = $("<td>" + record.deposit + "</td>");
+                    //5-td
+                    tr.append(tdMName);
+                    tr.append(tdBName);
+                    tr.append(tdRentDate);
+                    tr.append(tdBackDate);
+                    tr.append(tdDeposit);
+
+                    //加入到表
+                    $("#tbRecord").find("tbody").append(tr);
+                }
+
+            });
+        });
+
+    });
+
+</script>
+
 </body>
 </html>
