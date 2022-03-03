@@ -1,6 +1,6 @@
 # 基于Java语言的Servlet技术完成的图书管理系统
 
-![img.png](readmeStatic/img.png)
+![img](readmeStatic/img.png)
 
 ## 项目介绍
 
