@@ -36,30 +36,30 @@ public class MemberServlet extends HttpServlet {
 
         String method = req.getParameter("type");
 
-        switch (method){
+        switch (method) {
             case "query":
-                query(req,resp,out,application);
+                query(req, resp, out, application);
                 break;
             case "addpre":
-                addpre(req,resp,out,application);
+                addpre(req, resp, out, application);
                 break;
             case "add":
-                add(req,resp,out,application);
+                add(req, resp, out, application);
                 break;
             case "modifypre":
-                modifypre(req,resp,out,application);
+                modifypre(req, resp, out, application);
                 break;
             case "modify":
-                modify(req,resp,out,application);
+                modify(req, resp, out, application);
                 break;
             case "remove":
-                remove(req,resp,out,application);
+                remove(req, resp, out, application);
                 break;
             case "modifyrecharge":
-                modifyrecharge(req,resp,out,application);
+                modifyrecharge(req, resp, out, application);
                 break;
             case "doajax":
-                doajax(req,resp,out,application);
+                doajax(req, resp, out, application);
                 break;
         }
     }
@@ -79,11 +79,11 @@ public class MemberServlet extends HttpServlet {
 
         boolean b = memberBiz.memberRecharge(idNumber, amount);
 
-        if (b){
+        if (b) {
             List<Member> members = memberBiz.getAll();
-            req.setAttribute("memberList",members);
+            req.setAttribute("memberList", members);
             req.getRequestDispatcher("mem_list.jsp").forward(req, resp);
-        }else {
+        } else {
             out.println("<script>alert('充值失败！');</script>");
         }
 
@@ -94,11 +94,11 @@ public class MemberServlet extends HttpServlet {
 
         boolean remove = memberBiz.remove(memberId);
 
-        if (remove){
+        if (remove) {
             List<Member> members = memberBiz.getAll();
-            req.setAttribute("memberList",members);
+            req.setAttribute("memberList", members);
             req.getRequestDispatcher("mem_list.jsp").forward(req, resp);
-        }else {
+        } else {
             out.println("<script>alert('删除失败！');</script>");
         }
     }
@@ -107,7 +107,7 @@ public class MemberServlet extends HttpServlet {
         // 准备好 member
         long id = Long.parseLong(req.getParameter("id"));
         Member member = memberBiz.getById(id);
-        req.setAttribute("member",member);
+        req.setAttribute("member", member);
 
         // 转发到 jsp 页面
         req.getRequestDispatcher("mem_modify.jsp").forward(req, resp);
@@ -142,11 +142,11 @@ public class MemberServlet extends HttpServlet {
 
         boolean modify = memberBiz.modify(member);
 
-        if (modify){
+        if (modify) {
             List<Member> members = memberBiz.getAll();
-            req.setAttribute("memberList",members);
+            req.setAttribute("memberList", members);
             req.getRequestDispatcher("mem_list.jsp").forward(req, resp);
-        }else {
+        } else {
             out.println("<script>alert('修改失败！');</script>");
         }
     }
@@ -156,7 +156,7 @@ public class MemberServlet extends HttpServlet {
         MembertypeBiz membertypeBiz = new MembertypeBiz();
 
         List<Membertype> membertypes = membertypeBiz.getAll();
-        req.setAttribute("memberTypes",membertypes);
+        req.setAttribute("memberTypes", membertypes);
 
         // 转发到 jsp 页面
         req.getRequestDispatcher("mem_add.jsp").forward(req, resp);
@@ -179,7 +179,7 @@ public class MemberServlet extends HttpServlet {
         String idNumber = req.getParameter("idNumber");
 
         // 确认密码和密码不一致
-        if (!pwd.equals(pwd2)){
+        if (!pwd.equals(pwd2)) {
             out.println("<script>alert('密码和确认密码不一致！');location.href='mem_list.jsp';</script>");
         }
 
@@ -193,11 +193,11 @@ public class MemberServlet extends HttpServlet {
         member.setIdNumber(idNumber);
 
         boolean register = memberBiz.register(member);
-        if (register){
+        if (register) {
             List<Member> members = memberBiz.getAll();
-            req.setAttribute("memberList",members);
+            req.setAttribute("memberList", members);
             req.getRequestDispatcher("mem_list.jsp").forward(req, resp);
-        }else {
+        } else {
             out.println("<script>alert('注册失败！');</script>");
         }
     }
@@ -205,7 +205,7 @@ public class MemberServlet extends HttpServlet {
     private void query(HttpServletRequest req, HttpServletResponse resp, PrintWriter out, ServletContext application) throws ServletException, IOException {
         List<Member> members = memberBiz.getAll();
 
-        req.setAttribute("memberList",members);
+        req.setAttribute("memberList", members);
 
         // 转发到 jsp 页面
         req.getRequestDispatcher("mem_list.jsp").forward(req, resp);
