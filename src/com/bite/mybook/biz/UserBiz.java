@@ -2,7 +2,10 @@ package com.bite.mybook.biz;
 
 import com.bite.mybook.bean.User;
 import com.bite.mybook.dao.UserDao;
+import com.bite.mybook.util.DBHelper;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 public class UserBiz {
@@ -31,4 +34,16 @@ public class UserBiz {
         return isModify;
     }
 
+    /*
+     *   获取用户对象
+     * */
+    public User getUserById(long id){
+        User user = null;
+        try {
+            user = userDao.getUserById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }
