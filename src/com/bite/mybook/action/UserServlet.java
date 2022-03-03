@@ -35,20 +35,23 @@ public class UserServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         // 设置响应的字符集编码
         resp.setContentType("text/html;charset=utf-8");
-
-        HttpSession session = req.getSession();
-
-        String method = req.getParameter("type");
-
         PrintWriter out = resp.getWriter();
 
-        switch (method){
+        //验证用户是否登录
+        HttpSession session = req.getSession();
+        if (session.getAttribute("user") == null) {
+            out.println("<script>alert('请登录');parent.window.location.href='login.html';</script>");
+            return;
+        }
+
+        String method = req.getParameter("type");
+        switch (method) {
             case "login":
                 String code = (String) session.getAttribute("code");
                 String usercode = req.getParameter("valcode");
 
                 // 如果验证码错误，即不用继续执行
-                if (!code.equalsIgnoreCase(usercode)){
+                if (!code.equalsIgnoreCase(usercode)) {
                     out.println("<script>alert('验证码输入错误！');location.href='login.html';</script>");
                     return;
                 }
