@@ -79,6 +79,22 @@ public class BookDao {
 
         return line == 1;
     }
+
+    // 更新书籍库存
+    // count: > 0 加库存
+    //        < 0 减库存
+    public boolean modify(long bookId,long count) throws SQLException {
+        Connection connection = DBHelper.getConnection();
+
+        String sql = "update book set stock=stock+? where id=?";
+
+        int line = runner.update(connection,sql, count, bookId);
+
+        connection.close();
+
+        return line == 1;
+    }
+
     // 获取有多少本书
     public int getCount() throws SQLException {
         Connection connection = DBHelper.getConnection();
@@ -131,5 +147,15 @@ public class BookDao {
         connection.close();
 
         return line == 1;
+    }
+
+    public static void main(String[] args) {
+        BookDao bookDao = new BookDao();
+
+        try {
+            bookDao.modify(3,-1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
