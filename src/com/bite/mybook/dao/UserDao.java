@@ -24,7 +24,7 @@ public class UserDao {
         String sql = "select * from user where name=? and pwd=? and state=1";
 
         // 第三步：调用查询方法，将返回的查询结果进行封装
-        User user = runner.query(connection, sql, new BeanHandler<User>(User.class), name, pwd);
+        User user = runner.query(connection, sql, new BeanHandler<>(User.class), name, pwd);
 
         // 第四步：关闭连接
         connection.close();
@@ -49,5 +49,20 @@ public class UserDao {
 
         // 此时即修改成功
         return line;
+    }
+
+    /*
+     *   获取用户对象
+     * */
+    public User getUserById(long id) throws SQLException {
+        Connection connection = DBHelper.getConnection();
+
+        String sql = "select * from user where id=? and state=1";
+
+        User user = runner.query(connection, sql, new BeanHandler<>(User.class),id);
+
+        connection.close();
+
+        return user;
     }
 }
