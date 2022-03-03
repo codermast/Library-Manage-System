@@ -110,4 +110,53 @@ public class MemberBiz {
         }
         return isTrue;
     }
+
+    // 通过mId修改余额
+
+    /*
+     *   amount > 0 : 借书，付押金
+     *   amount < 0 : 还书，退押金
+     * */
+    public boolean memberChangeByMid(long mid,double amount){
+        boolean b = false;
+        try {
+            b = memberDao.memberChangeByMid(mid, amount);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return b;
+    }
+
+    // 通过身份证号获取会员信息
+    public Member getMemberByIdNumber(String idNumber){
+        Member member = null;
+        try {
+            member = memberDao.getMemberByIdNumber(idNumber);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return member;
+    }
+
+    // 通过 id 获取 idNumber
+    public String getIdNumById(long id){
+        Member memberById = null;
+        try {
+            memberById = memberDao.getMemberById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return memberById.getIdNumber();
+    }
+
+    // 通过 idNumber 获取 id
+    public long getIdByIdNum(String idNumber){
+        long idByIdNum = 0;
+        try {
+            idByIdNum = memberDao.getIdByIdNum(idNumber);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idByIdNum;
+    }
 }
