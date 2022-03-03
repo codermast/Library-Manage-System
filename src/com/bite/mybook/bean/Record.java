@@ -12,13 +12,45 @@ public class Record implements Serializable {
   private java.sql.Date backDate;
   private double deposit;
   private long userId;
-  private String isbn;
+  private long isBack;
+
 
   //外键
   private Member member;
   private Book book;
   private User user;
 
+  public long getIsBack() {
+    return isBack;
+  }
+
+  public void setIsBack(long isBack) {
+    this.isBack = isBack;
+  }
+
+  public Member getMember() {
+    return member;
+  }
+
+  public void setMember(Member member) {
+    this.member = member;
+  }
+
+  public Book getBook() {
+    return book;
+  }
+
+  public void setBook(Book book) {
+    this.book = book;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
 
   public long getId() {
     return id;
@@ -82,15 +114,6 @@ public class Record implements Serializable {
     this.userId = userId;
   }
 
-
-  public String getIsbn() {
-    return isbn;
-  }
-
-  public void setIsbn(String isbn) {
-    this.isbn = isbn;
-  }
-
   @Override
   public String toString() {
     return "Record{" +
@@ -101,7 +124,6 @@ public class Record implements Serializable {
             ", backDate=" + backDate +
             ", deposit=" + deposit +
             ", userId=" + userId +
-            ", isbn='" + isbn + '\'' +
             ", member=" + member +
             ", book=" + book +
             ", user=" + user +
