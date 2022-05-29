@@ -2,6 +2,14 @@
 
 ![img](readmeStatic/img.png)
 
+
+## 源码下载
+
+百度网盘: [https://pan.baidu.com/s/1-0vk8HscZYlESQwsst-IUw?pwd=38fx](https://pan.baidu.com/s/1-0vk8HscZYlESQwsst-IUw?pwd=38fx)
+
+         提取码：38fx 
+GitHub：https://github.com/codermast/Library-Manage-System/raw/master/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-JavaWeb.rar
+
 ## 项目介绍
 
 &emsp;&emsp;本项目是本人在大三阶段，学习完了Java
